@@ -1,0 +1,170 @@
+* {box-sizing: border-box;}
+
+body
+{
+	font-family: verdana, sans-serif;
+	background-color: #242163;
+	font-size: 14px;
+	color: #FFFFFF;
+}
+
+header
+{
+	font-family: impact, sans-serif;
+	font-size: 32px;
+	text-align: center;
+	text-shadow: 2px 2px #da52b6, -2px -2px #da52b6, 2px -2px #da52b6, -2px 2px #da52b6, 3px 3px 5px #ffe155, -3px -3px 5px #ffe155, 3px -3px 5px #ffe155, -3px 3px 5px #ffe155;
+	color: #000000;
+	padding: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	background-image: url("headerimg.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: 50% 50%;
+	display: block;
+}
+
+ul 
+{
+  list-style-type: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  overflow: hidden;
+  background-color: #787878;
+}
+
+li {float: left;}
+
+li a 
+{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:link{color: #4800bd;}
+
+li a:visited{color: #500075;}
+
+li a:hover{color: #FFFFFF;}
+
+footer
+{
+	margin-top: 100px;
+	text-align: center;
+}
+
+label
+{
+	float: left;
+	display: block;
+	width: 8em;
+	padding-right: 1em;
+}
+
+input, textarea
+{
+	display: block;
+	margin-bottom: 1em;
+}
+
+#main
+{
+	color: #000000;
+	background-color: #d3d4e8;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+	text-align: left;
+}
+
+#redtext{color: red;}
+
+#submit
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#mobile {display: none;}
+
+#desktop {display: inline;}
+
+@media only screen and (max-width: 1024px)
+{
+	body
+	{
+		margin: 0px;
+		padding: 0px;
+	}
+	
+	header
+	{
+		background-size: 100%;
+		margin: 0px;
+		padding: 0px;
+	}
+	
+	ul
+	{
+	width: auto;
+	padding: 0.5em;
+	}
+	
+	li
+	{
+		display: inline-block;
+		float: none;
+	}
+	
+	li a{padding: 1em;}
+	
+	#main
+	{
+		padding: 1em;
+		margin-left: 0px;
+		font-size: 90%;
+	}
+	footer{margin: 0px;}
+}
+@media only all and (max-width: 768px)
+{
+	header
+	{
+		background-image: none;
+		margin: 0px;
+		padding: 0px;
+		height: 10%
+	}
+	
+	ul{padding: 0px;}
+	
+	li
+	{
+		display: block;
+	    margin: 0px;
+	    padding: 0px;
+	}
+	
+	li a
+	{
+		display: block;
+		padding: 0.2em;
+		font-size: 1.3em;
+	}
+	
+	footer{padding: 0px;}
+	
+	#main
+	{
+	 padding: 0;
+	}
+	
+	#mobile {display: inline;}
+	
+	#desktop {display: none;}
+}
