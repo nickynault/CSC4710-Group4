@@ -35,12 +35,31 @@
   </p>
   </div>
   
-	</div>
+		</div>
   <div class="container">
-  <a class="button" href="todo.html" style="--color:#1e9bff;">
+  <a class="button"  style="--color:#1e9bff;" href="#myForm">
     Start your to-do list here!
-    </a>
+  </a>
   </div>
+
+  <form id="myForm" style="display:block" action="add_task.php" method="post">
+		<label for="task_desc">Task Description:</label>
+		<input type="text" id="task_desc" name="task_desc"><br><br>
+		<label for="due_date">Due Date:</label>
+		<input type="date" id="due_date" name="due_date"><br><br>
+		<label for="task_category">Task Category:</label>
+		<select id="task_category" name="task_category">
+			<option value="Work">Work</option>
+			<option value="Personal">Personal</option>
+			<option value="Shopping">Shopping</option>
+			<option value="Other">Other</option>
+		</select><br><br>
+		<label for="priority">Priority Level:</label>
+		<input type="number" id="priority" name="priority" min="1" max="4"><br><br>
+		<label for="status">Status (Check if Completed):</label>
+		<input type="checkbox" id="status" name="status" value="active"><br><br>
+		<input type="submit" value="Create">
+	</form>
 	
   <footer>
   <p>Copyright © Group 4 with Wayne State University and their respective owners.</p>
