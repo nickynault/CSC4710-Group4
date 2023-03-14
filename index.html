@@ -43,12 +43,13 @@
   </div>
 
   <form id="myForm" style="display:block" action="add_task.php" method="post">
-		<label for="task_desc">Task Description:</label>
+		<label for="task_desc">Task Description*:</label>
 		<input type="text" id="task_desc" name="task_desc"><br><br>
-		<label for="due_date">Due Date:</label>
+		<label for="due_date">Due Date*:</label>
 		<input type="date" id="due_date" name="due_date"><br><br>
 		<label for="task_category">Task Category:</label>
 		<select id="task_category" name="task_category">
+			<option value="">N/A</option>
 			<option value="Work">Work</option>
 			<option value="Personal">Personal</option>
 			<option value="Shopping">Shopping</option>
