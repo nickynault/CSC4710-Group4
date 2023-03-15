@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -46,7 +46,8 @@
 			<option value="active">Active</option>
 			<option value="completed">Completed</option>
 		</select><br><br>
-	  
+	    <input type="submit" value="Create">
+	    
 <?php if(isset($_GET['success'])): ?>
   <p>Task successfully added!</p>
 <?php endif; ?>
