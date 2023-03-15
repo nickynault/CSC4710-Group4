@@ -8,8 +8,9 @@
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
   </script>
   <![endif]-->
+  <title>About Authors</title>
 </head>
-<title>About Authors</title>
+
 <body>
   <header>
 	<h1>About the Authors</h1>
