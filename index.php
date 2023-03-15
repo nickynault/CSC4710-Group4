@@ -18,7 +18,7 @@
 
   <nav>
 	<ul>
-		<li><a href= "index.html">Home</a></li>
+		<li><a href= "index.php">Home</a></li>
 		<li><a href= "about.html">About the Authors</a></li>
 	</ul>
   </nav>
@@ -56,16 +56,18 @@
 		<label for="priority">Priority Level:</label>
 		<input type="number" id="priority" name="priority" min="1" max="4"><br><br>
 		<label for="status">Status (Check if Completed):</label>
-		<input type="checkbox" id="status" name="status" value="active"><br><br>
-		<input type="submit" value="Create">
-		<?php if(isset($_GET['success'])): ?>
+		<select id="task_category" name="task_category">
+			<option value="active">Active</option>
+			<option value="completed">Completed</option>
+		</select><br><br>
+	  
+<?php if(isset($_GET['success'])): ?>
   <p>Task successfully added!</p>
 <?php endif; ?>
 
 <form id="myForm" action="add_task.php" method="post" style="display:none;">
   <!-- form fields -->
-</form>
-	</form>
+	  </form>
 	
   <footer>
   <p>Copyright © Group 4 with Wayne State University and their respective owners.</p>
