@@ -19,6 +19,7 @@
   <nav>
 	<ul>
 		<li><a href= "about.html">About the Authors</a></li>
+		<li><a href= "form.php">Submit Form</a></li>
 		<li><a href= "todo.php">To-Do Lists</a></li>
 	</ul>
   </nav>
@@ -35,40 +36,12 @@
   </div>
   
   <div class="container">
-  <a class="button"  style="--color:#1e9bff;" href="#myForm">
+  <a class="button"  style="--color:#1e9bff;" href="form.php">
     Start your to-do list here!
   </a>
   </div>
 
-  <form id="myForm" style="display:block" action="add_task.php" method="post">
-		<label for="task_desc">Task Description*:</label>
-		<input type="text" id="task_desc" name="task_desc"><br><br>
-		<label for="due_date">Due Date*:</label>
-		<input type="date" id="due_date" name="due_date"><br><br>
-		<label for="task_category">Task Category:</label>
-		<select id="task_category" name="task_category">
-			<option value="">N/A</option>
-			<option value="Work">Work</option>
-			<option value="Personal">Personal</option>
-			<option value="Shopping">Shopping</option>
-			<option value="Other">Other</option>
-		</select><br><br>
-		<label for="priority">Priority Level:</label>
-		<input type="number" id="priority" name="priority" min="1" max="4"><br><br>
-		<label for="task_status">Status*:</label>
-		<select id="task_status" name="task_status">
-			<option value="active">Active</option>
-			<option value="completed">Completed</option>
-		</select><br><br>
-	  
-<?php if(isset($_GET['success'])): ?>
-  <p>Task successfully added!</p>
-<?php endif; ?>
-
-<form id="myForm" action="add_task.php" method="post" style="display:none;">
-  <!-- form fields -->
-	  </form>
-	
+ 
   <footer>
   <p>Copyright © Group 4 with Wayne State University and their respective owners.</p>
   </footer>
