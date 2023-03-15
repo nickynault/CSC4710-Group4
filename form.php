@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -8,7 +8,7 @@
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
   </script>
   <![endif]-->
-  <title>Make Your Own To-Do List!</title>
+  <title>About Authors</title>
 </head>
 
 <body>
@@ -19,8 +19,7 @@
   <nav>
 	<ul>
 		<li><a href= "index.php">Home</a></li>
-		<li><a href= "about.html">About the Authors</a></li>
-		<li><a href= "form.php">Submit Form</a></li>
+		<li><a href= "about.html">About Us</a></li>
 		<li><a href= "todo.php">To-Do Lists</a></li>
 	</ul>
   </nav>
@@ -47,7 +46,14 @@
 			<option value="active">Active</option>
 			<option value="completed">Completed</option>
 		</select><br><br>
-		<input type="submit" value="Create">
+	    <input type="submit" value="Create">
+	    
+<?php if(isset($_GET['success'])): ?>
+  <p>Task successfully added!</p>
+<?php endif; ?>
+
+<form id="myForm" action="add_task.php" method="post" style="display:none;">
+  <!-- form fields -->
 	  </form>
   
   <footer>
