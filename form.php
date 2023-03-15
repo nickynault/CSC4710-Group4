@@ -8,12 +8,12 @@
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
   </script>
   <![endif]-->
-  <title>About Authors</title>
+  <title>Create Your Task!</title>
 </head>
 
 <body>
   <header>
-	<h1>About the Authors</h1>
+	<h1>Create Your Task!</h1>
   </header>
 
   <nav>
