@@ -8,7 +8,7 @@
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
   </script>
   <![endif]-->
-  <title>About Authors</title>
+  <title>Make Your Own To-Do List!</title>
 </head>
 
 <body>
