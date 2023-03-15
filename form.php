@@ -47,13 +47,7 @@
 			<option value="active">Active</option>
 			<option value="completed">Completed</option>
 		</select><br><br>
-	  
-<?php if(isset($_GET['success'])): ?>
-  <p>Task successfully added!</p>
-<?php endif; ?>
-
-<form id="myForm" action="add_task.php" method="post" style="display:none;">
-  <!-- form fields -->
+		<input type="submit" value="Create">
 	  </form>
   
   <footer>
