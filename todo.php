@@ -8,12 +8,12 @@
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
   </script>
   <![endif]-->
-  <title>Make Your Own To-Do List!</title>
+  <title>Your To-Do Lists</title>
 </head>
 
 <body>
   <header>
-	<h1>About the Authors</h1>
+	<h1>Your To-Do Lists</h1>
   </header>
   <nav>
 	<ul>
@@ -25,8 +25,6 @@
   </nav>
   
   <div id="main">
- 
-
   
   <footer>
   <p>Copyright © Group 4 with Wayne State University and their respective owners.</p>
