@@ -55,7 +55,7 @@
 		</select><br><br>
 		<label for="priority">Priority Level:</label>
 		<input type="number" id="priority" name="priority" min="1" max="4"><br><br>
-		<label for="task_status">Status:</label>
+		<label for="task_status">Status*:</label>
 		<select id="task_status" name="task_status">
 			<option value="active">Active</option>
 			<option value="completed">Completed</option>
