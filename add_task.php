@@ -24,7 +24,7 @@ $sql = "INSERT INTO tasks (task_desc, due_date, task_category, priority, task_st
 
 if (mysqli_query($conn, $sql)) {
 	// Redirect to home page
-	header("Location: index.php");
+	header("Location: todo.php");
 	exit();
 } else {
 	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
