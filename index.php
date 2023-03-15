@@ -18,6 +18,7 @@
 
   <nav>
 	<ul>
+	    <li><a href= "index.php">Home</a></li>
 		<li><a href= "about.html">About the Authors</a></li>
 		<li><a href= "form.php">Submit Form</a></li>
 		<li><a href= "todo.php">To-Do Lists</a></li>
