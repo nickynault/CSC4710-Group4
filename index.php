@@ -19,7 +19,7 @@
   <nav>
 	<ul>
 		<li><a href= "about.html">About the Authors</a></li>
-		<li><a href= "todo.html">To-Do Lists</a></li>
+		<li><a href= "todo.php">To-Do Lists</a></li>
 	</ul>
   </nav>
   
