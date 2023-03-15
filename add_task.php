@@ -4,7 +4,7 @@
 // Database connection
 $servername = "localhost";
 $username = "id20153491_testingthis";
-$password = "i]8[EBlzQ[!4!u5s";
+$password = "W%_y~N_A^vW*]s@0";
 $database = "id20153491_test";
 
 $conn = mysqli_connect($servername, $username, $password, $database);
