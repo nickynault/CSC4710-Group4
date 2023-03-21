@@ -23,9 +23,10 @@ $status = isset($_POST['status']) ? 'active' : 'completed';
 $sql = "INSERT INTO tasks (task_desc, due_date, category_name, priority, task_status) VALUES ('$task_desc', '$due_date', '$task_category', $priority, '$status')";
 
 if (mysqli_query($conn, $sql)) {
-	// Redirect to home page
-	header("Location: todo.php");
-	exit();
+	header('Refresh:0; url=form.php');
+	echo '<script type="text/javascript">
+            window.onload = function () { alert("Task created!"); } 
+        </script>'; 
 } else {
 	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }

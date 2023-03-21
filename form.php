@@ -1,3 +1,19 @@
+<?php	
+// Database connection
+	$servername = "localhost";
+	$username = "id20153491_testingthis";
+	$password = "W%_y~N_A^vW*]s@0";
+	$database = "id20153491_test";
+
+	$conn = mysqli_connect($servername, $username, $password, $database);
+	if (!$conn) {
+	die("Connection failed: " . mysqli_connect_error());
+	}
+	$sql = "SELECT * FROM categories";
+	$result = mysqli_query($conn, $sql);
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,11 +49,14 @@
 		<input type="date" id="due_date" name="due_date"><br><br>
 		<label for="task_category">Task Category:</label>
 		<select id="task_category" name="task_category">
-			<option value="">N/A</option>
-			<option value="Work">Work</option>
-			<option value="Personal">Personal</option>
-			<option value="Shopping">Shopping</option>
-			<option value="Other">Other</option>
+		<?php
+              while ($row = mysqli_fetch_assoc($result)) { 
+				foreach ($row as $field => $value) { 
+					echo "<option>" . $value . "</option>"; 
+				}
+			}
+		?>
+		
 		</select><br><br>
 		<label for="priority">Priority Level:</label>
 		<input type="number" id="priority" name="priority" min="1" max="4"><br><br>
@@ -46,16 +65,18 @@
 			<option value="active">Active</option>
 			<option value="completed">Completed</option>
 		</select><br><br>
-	    <input type="submit" value="Create">
+	    <input type="submit" value="Create Task">
 	    
-<?php if(isset($_GET['success'])): ?>
-  <p>Task successfully added!</p>
-<?php endif; ?>
+</form>
 
-<form id="myForm" action="add_task.php" method="post" style="display:none;">
-  <!-- form fields -->
-	  </form>
-  
+<br />
+
+<form id="myForm2" style="display:block" action="add_category.php" method="post">
+	<label for="category_name">Category Name:</label>
+	<input type="text" id="category_name" name="category_name"><br><br>
+	<input type="submit" value="Create Category">
+</form>
+
   <footer>
   <p>Copyright © Group 4 with Wayne State University and their respective owners.</p>
   </footer>
