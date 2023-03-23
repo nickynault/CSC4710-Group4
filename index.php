@@ -43,7 +43,4 @@
   </div>
 
  
-  <footer>
-  <p>Copyright © Group 4 with Wayne State University and their respective owners.</p>
-  </footer>
 </body>
