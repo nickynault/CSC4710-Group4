@@ -51,9 +51,9 @@
 		<select id="task_category" name="task_category">
 		<?php
               while ($row = mysqli_fetch_assoc($result)) { 
-				foreach ($row as $field => $value) { 
-					echo "<option>" . $value . "</option>"; 
-				}
+				 
+				echo "<option>" . $row['category_name'] . "</option>"; 
+				
 			}
 		?>
 		
