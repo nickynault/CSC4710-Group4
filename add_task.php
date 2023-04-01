@@ -21,7 +21,7 @@ $priority = $_POST['priority'];
 $task_status = isset($_POST['task_status']) ? 'active' : 'completed';
 
 // SQL query to insert new task
-$sql = "INSERT INTO tasks (id,task_desc, due_date, category_name, priority, task_status) VALUES ('$id','$task_desc', '$due_date', '$task_category', $priority, '$task_status')";
+$sql = "INSERT INTO tasks (id,task_desc, due_date, task_category, priority, task_status) VALUES ('$id','$task_desc', '$due_date', '$task_category', '$priority', '$task_status')";
 
 if (mysqli_query($conn, $sql)) {
 	header('Refresh:0; url=form.php');
@@ -34,4 +34,3 @@ if (mysqli_query($conn, $sql)) {
 
 mysqli_close($conn);
 ?>
-

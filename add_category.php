@@ -13,12 +13,12 @@ if (!$conn) {
 }
 
 // Get form data
-$i = uniqid();
+$id = uniqid();
 $category_name = $_POST['category_name'];
 $status = isset($_POST['status']) ? 'active' : 'completed';
 
 // SQL query to insert new task
-$sql = "INSERT INTO categories (id,categor_name) VALUES ('$id',$category_name')";
+$sql = "INSERT INTO categories (id,categor_name) VALUES ('$id','$category_name')";
 
 if (mysqli_query($conn, $sql)) {
     header('Refresh:0; url=form.php');

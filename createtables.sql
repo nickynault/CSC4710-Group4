@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 DROP TABLE IF EXISTS tasks;
 CREATE TABLE tasks(
-        id int NOT NULL,
+        id varchar(255) NOT NULL,
   		  task_desc varchar(255) NOT NULL,
         due_date date NOT NULL,
         task_category varchar(255),
