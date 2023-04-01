@@ -71,6 +71,7 @@
 				$update = "UPDATE tasks SET task_desc='$task_desc', due_date='$due_date', task_category='$task_category', priority='$priority', task_status='$task_status' WHERE id='$id'";
 				mysqli_query($conn, $update);
 				header("Location: todo.php");
+        exit();
 			}
           ?>
       </table>
