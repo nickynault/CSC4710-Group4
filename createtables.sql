@@ -13,7 +13,7 @@ CREATE TABLE tasks(
   
 DROP TABLE IF EXISTS categories;
 CREATE TABLE categories(
-      id int NOT NULL,
+      id varchar (255) NOT NULL,
   		category_name varchar(255)
   );
 
