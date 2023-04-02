@@ -1,5 +1,13 @@
 <<<<<<< HEAD
 DROP TABLE IF EXISTS tasks;
+DROP TABLE IF EXISTS categories;
+
+CREATE TABLE categories(
+    id varchar (255) NOT NULL,
+    category_name varchar(255),
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE tasks(
     id varchar(255) NOT NULL,
     task_desc varchar(255) NOT NULL,
@@ -7,17 +15,12 @@ CREATE TABLE tasks(
     task_category_id varchar(255),
     task_priority int NOT NULL,
     task_status boolean NOT NULL,
-    CHECK (1 <= priority <= 4),
+    CHECK (1 <= task_priority <= 4),
     PRIMARY KEY (id),
     FOREIGN KEY (task_category_id) REFERENCES categories(id)
 );
   
-DROP TABLE IF EXISTS categories;
-CREATE TABLE categories(
-    id varchar (255) NOT NULL,
-    category_name varchar(255),
-    PRIMARY KEY (id)
-);
+
 
 =======
 DROP TABLE IF EXISTS tasks;

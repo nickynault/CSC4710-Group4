@@ -16,12 +16,12 @@ if (!$conn) {
 $id = uniqid();
 $task_desc = $_POST['task_desc'];
 $due_date = $_POST['due_date'];
-$task_category = $_POST['task_category'];
-$priority = $_POST['priority'];
-$task_status = isset($_POST['task_status']) ? 'active' : 'completed';
+$task_priority = $_POST['task_priority'];
+$task_category_id = trim($_POST['category_name']);
+$task_status = isset($_POST['task_status']) ? 1 : 0;
 
 // SQL query to insert new task
-$sql = "INSERT INTO tasks (id,task_desc, due_date, task_category, priority, task_status) VALUES ('$id','$task_desc', '$due_date', '$task_category', '$priority', '$task_status')";
+$sql = "INSERT INTO tasks (id, task_desc, due_date, task_category_id, task_priority, task_status) VALUES ('$id', '$task_desc', '$due_date', '$task_category_id', '$task_priority', '$task_status')";
 
 if (mysqli_query($conn, $sql)) {
 	header('Refresh:0; url=form.php');
