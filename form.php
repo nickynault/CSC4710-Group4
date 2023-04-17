@@ -37,6 +37,7 @@
       <li><a href= "about.html">About the Authors</a></li>
       <li><a href= "form.php">Create a Task or Category</a></li>
       <li><a href= "todo.php">Edit Tasks and Categories</a></li>
+      <li><a href= "todo2.php">See List Views</a></li>
 	</ul>
   </nav>
   
