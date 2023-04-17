@@ -22,7 +22,7 @@
 		<li><a href= "about.html">About the Authors</a></li>
 		<li><a href= "form.php">Submit Form</a></li>
 		<li><a href= "todo.php">To-Do Lists</a></li>
-		<li><a href= "todo2.php">See List Views</a></li>
+		<li><a href= "listview.php">See List Views</a></li>
 	</ul>
   </nav>
   
