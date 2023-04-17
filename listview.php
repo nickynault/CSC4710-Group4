@@ -103,32 +103,34 @@ if(isset($_POST['submit2'])){
       <h1>Custom Views</h1>
       <?php
         $taskQuery = "SELECT * FROM tasks ORDER BY task_priority ASC, due_date ASC";
+        $catQuery = "SELECT category_name FROM categories";
         $taskData = mysqli_query($conn, $taskQuery) or die('Unable to obtain data: '. mysqli_connect_error());
+        $catData = mysqli_query($conn, $catQuery) or die('Unable to obtain data: '. mysqli_connect_error());
         
-        
-        $tableViews = array(
-        'categoryView' => array_filter($taskData, function ($row) {
-            return $row['task_category_id'] == 'a';
+        $catArray = array();
+        if ($catData->num_rows > 0) {
+            while ($row = $catData->fetch_assoc()) {
+                $catArray[] = $row['category_name'];
             }
-        ),
-        );
+        }
         
         echo '<form method="post" action="">';
         echo '<label for="view">Select Table View: </label>';
         echo '<select id="view" name="view">';
-        foreach ($tableViews as $view => $rows) {
-            echo '<option value="' . $view . '">' . $view . '</option>';
+        foreach ($catArray as $value) {
+            echo '<option value="' . $value . '">' . $value . '</option>';
         }
         echo '</select>';
         echo '<input type="submit" value="Submit">';
         echo '</form>';
-        
+	  
+        /*
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $selectedView = $_POST['view'];
             if (isset($tableViews[$selectedView])) {
                 echo '<table>';
             }
-        }
+        }*/
       ?>
   </div>
   
