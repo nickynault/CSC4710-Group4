@@ -102,35 +102,47 @@ if(isset($_POST['submit2'])){
       <br />
       <h1>Custom Views</h1>
       <?php
-        $taskQuery = "SELECT * FROM tasks ORDER BY task_priority ASC, due_date ASC";
+        //Queries for category list views
+        $taskCatQuery = "SELECT * FROM tasks ORDER BY task_priority ASC, due_date ASC";
         $catQuery = "SELECT category_name FROM categories";
-        $taskData = mysqli_query($conn, $taskQuery) or die('Unable to obtain data: '. mysqli_connect_error());
+        $taskCatData = mysqli_query($conn, $taskCatQuery) or die('Unable to obtain data: '. mysqli_connect_error());
         $catData = mysqli_query($conn, $catQuery) or die('Unable to obtain data: '. mysqli_connect_error());
+        //Queries for completed tasks list view
+        $taskCompQuery = "SELECT * FROM tasks WHERE task_status = 1 ORDER BY due_date ASC";
+        $taskCompData = mysqli_query($conn, $taskCompQuery) or die('Unable to obtain data: '. mysqli_connect_error());
         
+        //Converts category_name column from categories table into array
         $catArray = array();
         if ($catData->num_rows > 0) {
-            while ($row = $catData->fetch_assoc()) {
+            while ($row = mysqli_fetch_assoc($catData)) {
                 $catArray[] = $row['category_name'];
             }
         }
+        //Converts entire tasks table into an array
+        $taskCatArray = array();
+        while ($row = mysqli_fetch_assoc($taskCatData)){
+            $taskCatArray[] = $row;
+        }
         
+        //Creates drop down list to select a list view
         echo '<form method="post" action="">';
-        echo '<label for="view">Select Table View: </label>';
+        echo '<label for="view">Select List View: </label>';
         echo '<select id="view" name="view">';
+        //Loops through the array created above to display available categories
         foreach ($catArray as $value) {
             echo '<option value="' . $value . '">' . $value . '</option>';
         }
         echo '</select>';
         echo '<input type="submit" value="Submit">';
         echo '</form>';
-	  
-        /*
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $selectedView = $_POST['view'];
-            if (isset($tableViews[$selectedView])) {
+        
+        //Brings up the selected form with the information
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $selectedView = $_POST['submit'];
+            if (isset($taskCatArray[$selectedView])) {
                 echo '<table>';
             }
-        }*/
+        }
       ?>
   </div>
   
