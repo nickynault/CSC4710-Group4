@@ -73,9 +73,9 @@ if(isset($_POST['submit2'])){
               <th>Status</th>
           </tr>
           <?php
-            //Defualt List View
+            //Default List View
             $fetch = "SELECT * FROM tasks WHERE due_date <= CURDATE() OR due_date = CURDATE() ORDER BY task_priority ASC";
-            $data = mysqli_query($conn, $fetch) or die('Unable to obtain data: '. mysqli_connect_error());
+            $data = mysqli_query($conn, $fetch) or die('Unable to obtain data: '. mysqli_error($conn));
 
             while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)){
                 echo "<tr><form method='post'>";
