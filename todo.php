@@ -62,7 +62,7 @@ if(isset($_POST['submit2'])){
   </nav>
 
   <div id="main">
-      <h1>Full List View</h1>
+      <h1>Edit</h1>
       <table>
           <tr>
               <th>Description</th>
@@ -96,28 +96,34 @@ if(isset($_POST['submit2'])){
                 echo "</form></tr>";
             }
           ?>
-      </table>
-      <br />
-      
-      <!--Category Editing & Display-->
-      <h1>Category List</h1>
       <table>
-          <tr>
-              <th>Category Name</th>
-          </tr>
-      <?php
-      $fetch2 = "SELECT * FROM categories ORDER BY category_name ASC";
-      $data = mysqli_query($conn, $fetch2) or die('Unable to obtain data: '. mysqli_connect_error());
-      while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)){
-        echo "<tr><form method='post'>";
-        echo "<td><input type='text' name='category_name' value='".$row["category_name"]."'></td>";
-        // Display categories dropdown
-        echo "<td><input type='submit' name='submit2' value='Save'></td>";
-        echo "<input type='hidden' name='id' value='".$row["id"]."'>";
-        echo "</form></tr>";
+  <tr>
+    <th>Category Name</th>
+  </tr>
+  <?php
+    $fetch2 = "SELECT * FROM categories ORDER BY category_name ASC";
+    $data = mysqli_query($conn, $fetch2) or die('Unable to obtain data: '. mysqli_connect_error());
+    while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)){
+      echo "<tr><form method='post'>";
+      echo "<td><input type='text' name='category_name' value='".$row["category_name"]."'></td>";
+      // Display categories dropdown
+      echo "<td><input type='submit' name='submit2' value='Save'></td>";
+      echo "<input type='hidden' name='id' value='".$row["id"]."'>";
+      echo "</form></tr>";
+    }
+    if(isset($_POST['submit2'])){
+      $id = $_POST['id'];
+      $category_name = $_POST['category_name'];
+      $check_query = mysqli_query($conn, "SELECT * FROM categories WHERE category_name='$category_name' AND id!='$id'");
+      if(mysqli_num_rows($check_query) > 0){
+        echo "<p style='color:red'>Category name already exists!</p>";
+      } else {
+        $update_query = mysqli_query($conn, "UPDATE categories SET category_name='$category_name' WHERE id='$id'");
+        header("Location: index.php");
       }
-      ?>
-      </table>
+    }
+  ?>
+  </table>
   </div>
   
 </body>

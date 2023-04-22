@@ -64,95 +64,111 @@ if(isset($_POST['submit2'])){
   <div id="main">
       <!--Table/List Views-->
       <h1>Default List View</h1>
-      <table>
-          <tr>
-              <th>Description</th>
-              <th>Due Date</th>
-              <th>Category</th>
-              <th>Priority Level</th>
-              <th>Status</th>
-          </tr>
-          <?php
-            //Default List View
-            $fetch = "SELECT * FROM tasks WHERE due_date <= CURDATE() OR due_date = CURDATE() ORDER BY task_priority ASC";
-            $data = mysqli_query($conn, $fetch) or die('Unable to obtain data: '. mysqli_error($conn));
+      <table style='border-collapse: collapse; width: 100%;'>
+      <thead style='text-align: center; background-color: #ddd;'>
+      <tr>
+        <th style='border: 1px solid black; padding: 5px;'>Task Description</th>
+        <th style='border: 1px solid black; padding: 5px;'>Due Date</th>
+        <th style='border: 1px solid black; padding: 5px;'>Task Category</th>
+        <th style='border: 1px solid black; padding: 5px;'>Priority</th>
+        <th style='border: 1px solid black; padding: 5px;'>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+        <?php
+        //Default List View
+        $fetch = "SELECT * FROM tasks WHERE due_date <= CURDATE() OR due_date = CURDATE() ORDER BY task_priority ASC";
+        $data = mysqli_query($conn, $fetch) or die('Unable to obtain data: '. mysqli_error($conn));
 
-            while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)){
-                echo "<tr><form method='post'>";
-                echo "<td><input type='text' name='task_desc' value='".$row["task_desc"]."'></td>";
-                echo "<td><input type='date' name='due_date' value='".$row["due_date"]."'></td>";
+        while ($row = mysqli_fetch_array($data, MYSQLI_ASSOC)){
+            echo "<tr>";
+            echo "<td style='border: 1px solid black; padding: 5px;'>".$row["task_desc"]."</td>";
+            echo "<td style='border: 1px solid black; padding: 5px;'>".$row["due_date"]."</td>";
+            // Display category name instead of category id
+            $category_query = mysqli_query($conn, "SELECT category_name FROM categories WHERE id='".$row['task_category_id']."'");
+            $category_name = mysqli_fetch_assoc($category_query)['category_name'];
+            echo "<td style='border: 1px solid black; padding: 5px;'>".$category_name."</td>";
 
-                // Display categories dropdown
-                echo "<td><select name='task_category_id'>";
-                $categories_query = mysqli_query($conn, "SELECT * FROM categories ORDER BY category_name ASC");
-                while ($category_row = mysqli_fetch_array($categories_query, MYSQLI_ASSOC)) {
-                    $selected = $category_row['id'] == $row['task_category_id'] ? 'selected' : '';
-                    echo "<option value='".$category_row['id']."' $selected>".$category_row['category_name']."</option>";
-                }
-                echo "</select></td>";
- 
-                echo "<td><input type='number' id='task_priority' name='task_priority' min='1' max='4' value='".$row["task_priority"]."'></td>";
-                echo "<td><input type='checkbox' name='task_status' value='1' " . ($row["task_status"] == 1 ? "checked" : "") . "></td>";
-                echo "<td><input type='submit' name='submit' value='Save'></td>";
-                echo "<input type='hidden' name='id' value='".$row["id"]."'>";
-                echo "</form></tr>";
-            }
-          ?>
-      </table>
+            echo "<td style='border: 1px solid black; padding: 5px;'>".$row["task_priority"]."</td>";
+            echo "<td style='border: 1px solid black; padding: 5px;'>".($row["task_status"] == 1 ? "Complete" : "Incomplete")."</td>";
+            echo "</tr>";
+        }
+        ?>
+    </tbody>
+    </table>
       <br />
      <h1>View By Category</h1>
       <?php
-        //Queries for category list views
-        $taskCatQuery = "SELECT * FROM tasks ORDER BY task_priority ASC, due_date ASC";
-        $catQuery = "SELECT category_name FROM categories";
-        $taskCatData = mysqli_query($conn, $taskCatQuery) or die('Unable to obtain data: '. mysqli_connect_error());
-        $catData = mysqli_query($conn, $catQuery) or die('Unable to obtain data: '. mysqli_connect_error());
+       // Check if category is selected
+        if(isset($_POST['category_id'])) {
+        // Get the category ID from the form
+        $category_id = $_POST['category_id'];
+    
+        // Query the tasks table for the selected category
+        $sql = "SELECT * FROM tasks WHERE task_category_id = '$category_id'";
+        $result = mysqli_query($conn, $sql);
+    
+        // Check if there are any tasks for the selected category
+        // Check if there are any tasks for the selected category
+    if(mysqli_num_rows($result) > 0) {
+      // Display a table of tasks for the selected category
+      echo "<table style='border-collapse: collapse; width: 100%;'>";
+      echo "<thead style='text-align: center; background-color: #ddd;'>";
+      echo "<tr>
+      <th style='border: 1px solid black; padding: 5px;'>Task Description</th>
+      <th style='border: 1px solid black; padding: 5px;'>Due Date</th>
+      <th style='border: 1px solid black; padding: 5px;'>Task Category</th>
+      <th style='border: 1px solid black; padding: 5px;'>Priority</th>
+      <th style='border: 1px solid black; padding: 5px;'>Status</th>
+      </tr>";
+      echo "</thead>";
+      echo "<tbody>";
+      while($row = mysqli_fetch_assoc($result)) {
+          echo "<tr>";
+          echo "<td style='border: 1px solid black; padding: 5px;'>" . $row['task_desc'] . "</td>";
+          echo "<td style='border: 1px solid black; padding: 5px;'>" . $row['due_date'] . "</td>";
+          $category_query = mysqli_query($conn, "SELECT category_name FROM categories WHERE id='".$row['task_category_id']."'");
+          $category_name = mysqli_fetch_assoc($category_query)['category_name'];
+          echo "<td style='border: 1px solid black; padding: 5px;'>".$category_name."</td>";
+          echo "<td style='border: 1px solid black; padding: 5px;'>" . $row['task_priority'] . "</td>";
+          echo "<td style='border: 1px solid black; padding: 5px;'>" . ($row['task_status'] ? 'Complete' : 'Incomplete') . "</td>";
+          echo "</tr>";
+      }
+      echo "</tbody>";
+      echo "</table>";
+  } else {
+      echo "No tasks found for the selected category.";
+  }
+}
+
+// Display a form to select a category
+      echo "<form method='post'>";
+      echo "<label for='category_id'>Select a category:</label>";
+      echo "<select id='category_id' name='category_id'>";
+      // Query the categories table for all categories
+      $sql = "SELECT * FROM categories";
+      $result = mysqli_query($conn, $sql);
+      while($row = mysqli_fetch_assoc($result)) {
+      echo "<option value='" . $row['id'] . "'>" . $row['category_name'] . "</option>";
+      }
+      echo "</select>";
+      echo "<input type='submit' value='Show Tasks'>";
+      echo "</form>";
         
-        //Converts category_name column from categories table into array
-        $catArray = array();
-        if ($catData->num_rows > 0) {
-            while ($row = mysqli_fetch_assoc($catData)) {
-                $catArray[] = $row['category_name'];
-            }
-        }
-        //Converts entire tasks table into an array
-        $taskCatArray = array();
-        while ($row = mysqli_fetch_assoc($taskCatData)){
-            $taskCatArray[] = $row;
-        }
-        
-        //Creates drop down list to select a list view
-        echo '<form method="post" action="">';
-        echo '<label for="view">Select Catgory View</label>';
-        echo '<select id="view" name="view">';
-        //Loops through the array created above to display available categories
-        foreach ($catArray as $value) {
-            echo '<option value="' . $value . '">' . $value . '</option>';
-        }
-        echo '</select>';
-        echo '<input type="submit" value="Submit">';
-        echo '</form>';
-        
-        //Brings up the selected form with the information
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $selectedView = $_POST['view'];
-            if (isset($catArray[$selectedView])) {
-                
-            }
-        }
       ?>
       <br />
       <h1>View by Completed Tasks</h1>
-      <table>
-          <!--
-          <tr>
-              <th>Description</th>
-              <th>Due Date</th>
-              <th>Category</th>
-              <th>Priority Level</th>
-              <th>Status</th>
-          </tr>
-          -->
+      <table style='border-collapse: collapse; width: 100%;'>
+      <thead style='text-align: center; background-color: #ddd;'>
+      <tr>
+        <th style='border: 1px solid black; padding: 5px;'>Task Description</th>
+        <th style='border: 1px solid black; padding: 5px;'>Due Date</th>
+        <th style='border: 1px solid black; padding: 5px;'>Task Category</th>
+        <th style='border: 1px solid black; padding: 5px;'>Priority</th>
+        <th style='border: 1px solid black; padding: 5px;'>Status</th>
+      </tr>
+      </thead>
+      <tbody>
           <?php
             //Queries for completed tasks list view
             $taskCompQuery = "SELECT * FROM tasks WHERE task_status = 1 ORDER BY due_date ASC";
@@ -161,36 +177,21 @@ if(isset($_POST['submit2'])){
                 echo "There are no completed tasks to display";
             }
             else{
-                echo "<tr>";
-                echo "<th>Descirption</th>";
-                echo "<th>Due Date</th>";
-                echo "<th>Category</th>";
-                echo "<th>Priority Level</th>";
-                echo "<th>Status</th>";
-                echo "</th>";
                 while ($row = mysqli_fetch_array($taskCompData, MYSQLI_ASSOC)){
-                    echo "<tr><form method='post'>";
-                    echo "<td><input type='text' name='task_desc' value='".$row["task_desc"]."'></td>";
-                    echo "<td><input type='date' name='due_date' value='".$row["due_date"]."'></td>";
-                    // Display categories dropdown
-                    echo "<td><select name='task_category_id'>";
-                    $categories_query = mysqli_query($conn, "SELECT * FROM categories ORDER BY category_name ASC");
-                    while ($category_row = mysqli_fetch_array($categories_query, MYSQLI_ASSOC)) {
-                        $selected = $category_row['id'] == $row['task_category_id'] ? 'selected' : '';
-                        echo "<option value='".$category_row['id']."' $selected>".$category_row['category_name']."</option>";
-                    }
-                echo "</select></td>";
-
-                echo "<td><input type='number' id='task_priority' name='task_priority' min='1' max='4' value='".$row["task_priority"]."'></td>";
-                echo "<td><input type='checkbox' name='task_status' value='1' " . ($row["task_status"] == 1 ? "checked" : "") . "></td>";
-                echo "<td><input type='submit' name='submit' value='Save'></td>";
-                echo "<input type='hidden' name='id' value='".$row["id"]."'>";
-                echo "</form></tr>";
+                  echo "<tr>";
+                  echo "<td style='border: 1px solid black; padding: 5px;'>" . $row['task_desc'] . "</td>";
+                  echo "<td style='border: 1px solid black; padding: 5px;'>" . $row['due_date'] . "</td>";
+                  $category_query = mysqli_query($conn, "SELECT category_name FROM categories WHERE id='".$row['task_category_id']."'");
+                  $category_name = mysqli_fetch_assoc($category_query)['category_name'];
+                  echo "<td style='border: 1px solid black; padding: 5px;'>".$category_name."</td>";
+                  echo "<td style='border: 1px solid black; padding: 5px;'>" . $row['task_priority'] . "</td>";
+                  echo "<td style='border: 1px solid black; padding: 5px;'>" . ($row['task_status'] ? 'Complete' : 'Incomplete') . "</td>";
+                  echo "</tr>";
                 }
             }
           ?>
+      </tbody>
       </table>
   </div>
-  
 </body>
 </html>
